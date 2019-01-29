@@ -20,6 +20,10 @@
 }
 
 + (instancetype)transformForLayer:(LOTLayer *)layer {
+  NSLog(@"Opacity");
+  for (LOTKeyframe *s in layer.opacity.keyframes) {
+    NSLog(@"time = %@, in = (%f,%f), out = (%f,%f), scale = %f", s.keyframeTime, s.inTangent.x, s.inTangent.y, s.outTangent.x, s.outTangent.y, s.floatValue);
+  }
   LOTTransformInterpolator *interpolator = nil;
   if (layer.position) {
     interpolator = [[LOTTransformInterpolator alloc] initWithPosition:layer.position.keyframes
@@ -43,6 +47,22 @@
                            scale:(NSArray <LOTKeyframe *> *)scale {
   self = [super init];
   if (self) {
+    NSLog(@"Position");
+    for (LOTKeyframe *pos in position) {
+      NSLog(@"time = %@, in = (%f,%f), out = (%f,%f), pos = (%f,%f)", pos.keyframeTime, pos.inTangent.x, pos.inTangent.y, pos.outTangent.x, pos.outTangent.y, pos.pointValue.x, pos.pointValue.y);
+    }
+    NSLog(@"Scale");
+    for (LOTKeyframe *s in scale) {
+      NSLog(@"time = %@, in = (%f,%f), out = (%f,%f), scale = %f", s.keyframeTime, s.inTangent.x, s.inTangent.y, s.outTangent.x, s.outTangent.y, s.floatValue);
+    }
+    NSLog(@"Rotation");
+    for (LOTKeyframe *rot in rotation) {
+      NSLog(@"time = %@, in = (%f,%f), out = (%f,%f), rotation = %f", rot.keyframeTime, rot.inTangent.x, rot.inTangent.y, rot.outTangent.x, rot.outTangent.y, rot.floatValue);
+    }
+    NSLog(@"Anchor");
+    for (LOTKeyframe *rot in anchor) {
+      NSLog(@"time = %@, in = (%f,%f), out = (%f,%f), rotation = %f", rot.keyframeTime, rot.inTangent.x, rot.inTangent.y, rot.outTangent.x, rot.outTangent.y, rot.floatValue);
+    }
     [self initializeWithPositionX:nil positionY:nil position:position rotation:rotation anchor:anchor scale:scale];
   }
   return self;
